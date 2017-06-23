@@ -26,7 +26,6 @@ $imagesSourceFolder = "$($applicationFolder + "ftp\")"
 ### Folder where we can search for all images incoming that are not getting processed
 $imagesDestinationFolder = "$applicationFolder$("tmp\")"
 
-
 Function checkIfResponsive {
   if((get-process "cmd.exe").Responding){
     'App running'
@@ -46,8 +45,6 @@ Function getCameraFolderName {
   $endIndex = $content.indexof("`r")
   return $content.Substring(20,($endIndex - 20))
 }
-
-
 
 Function getTimestamp {
   return Get-Date -UFormat "%Y-%m-%d-T%H%M_UTC%Z"
@@ -170,8 +167,6 @@ Function sendTextAlert {
 $gatekeeperCameraFolder = "$imagesDestinationFolder$(getCameraFolderName)"
 
 
-
-
 "Application monitoring started.  Watching $imagesSourceFolder and $imagesDestinationFolder and their subfolders..."
 "Any images older than $maxFileAge will trigger an application backup and restart."
 "Pending images willl be sent to $gatekeeperCameraFolder for reprocessing."
@@ -183,7 +178,7 @@ while ($true) {
   checkFileAgesInFolder $gatekeeperCameraFolder
   checkFileAgesInFolder $imagesSourceFolder
   SLEEP ($maxFileAge * 60)
-	}
+}
 
 ####################
 
